@@ -52,6 +52,11 @@ void TreeNode::insert(int val)
     }
 }
 
+/**
+ * @brief prints in order traversal
+ * 
+ * @return vector<int> containing in order traversal
+ */
 vector<int> TreeNode::printInOrder()
 {
     vector<int> res;
@@ -71,6 +76,11 @@ void printInOrderHelper(TreeNode * root, vector<int> &inOrderTraversal)
     printInOrderHelper(root->right, inOrderTraversal);
 }
 
+/**
+ * @brief prints post order traversal
+ * 
+ * @return vector<int> containing post order traversal
+ */
 vector<int> TreeNode::printPostOrder()
 {
     vector<int> res;
@@ -90,6 +100,11 @@ void printPostOrderHelper(TreeNode * root, vector<int> &postOrderTraversal)
     postOrderTraversal.push_back(root->val);
 }
 
+/**
+ * @brief prints pre order traversal
+ * 
+ * @return vector<int> containing pre order traversal
+ */
 vector<int> TreeNode::printPreOrder()
 {
     vector<int> res;
