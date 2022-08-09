@@ -1,6 +1,8 @@
 #include <iostream>
-
+#include <vector>
 #include "binarytree.h"
+
+using namespace std;
 
 /**
  * @brief Construct a new Tree Node:: Tree Node object
@@ -23,22 +25,14 @@ TreeNode::TreeNode(int x)
 void TreeNode::insert(int val)
 {
     TreeNode * n = new TreeNode(val);
-    
-    std::cout << "Traversing" << std::endl;
-    std::cout << this->val << std::endl;
-    std::cout << "Inserting" << std::endl;
-    std::cout << val << std::endl;
-
     if( this->val > val )
     {
         // Should insert left
         if( this->left == NULL)
         {
-            std::cout << "Insert left" << std::endl;
             // If there's nothing insert left
             this->left = n;
         } else {
-            std::cout << "Go left recursively" << std::endl;
             // If there's something on the left, recursively
             // go to left node and repeat.
             this->left->insert(val);
@@ -48,14 +42,69 @@ void TreeNode::insert(int val)
         // Should insert right
         if ( this->right == NULL )
         {
-            std::cout << "Insert right" << std::endl;
             // If there's nothing insert right
             this->right = n;
         } else {
-            std::cout << "Go right recursively" << std::endl;
             // If there's something on the right, recursively
             // go to right node and repeat.
             this->right->insert(val);
         }
     }
+}
+
+vector<int> TreeNode::printInOrder()
+{
+    vector<int> res;
+    printInOrderHelper(this, res);
+    return res;
+}
+
+void printInOrderHelper(TreeNode * root, vector<int> &inOrderTraversal)
+{
+    if (root == NULL)
+        return;
+    // Visit the left subtree
+    printInOrderHelper(root->left, inOrderTraversal);
+    // Visit the root
+    inOrderTraversal.push_back(root->val);
+    // Visit the right subtree
+    printInOrderHelper(root->right, inOrderTraversal);
+}
+
+vector<int> TreeNode::printPostOrder()
+{
+    vector<int> res;
+    printPostOrderHelper(this, res);
+    return res;
+}
+
+void printPostOrderHelper(TreeNode * root, vector<int> &postOrderTraversal)
+{
+    if (root == NULL)
+        return;
+    // Visit left subtree
+    printPostOrderHelper(root->left, postOrderTraversal);
+    // Visit right subtree
+    printPostOrderHelper(root->right, postOrderTraversal);
+    // Visit the root
+    postOrderTraversal.push_back(root->val);
+}
+
+vector<int> TreeNode::printPreOrder()
+{
+    vector<int> res;
+    printPreOrderHelper(this, res);
+    return res;
+}
+
+void printPreOrderHelper(TreeNode * root, std::vector<int> &postOrderTraversal)
+{
+    if (root == NULL)
+        return;
+    // Visit the root
+    postOrderTraversal.push_back(root->val);
+    // Visit the left subtree
+    printPreOrderHelper(root->left, postOrderTraversal);
+    // Visit the right subree
+    printPreOrderHelper(root->right, postOrderTraversal);
 }
